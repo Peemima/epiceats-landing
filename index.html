@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EpicEats - Revolutionize Your Restaurant with a Custom Mobile App</title>
+  <meta name="description" content="EpicEats empowers restaurants to launch branded mobile apps for effortless online ordering, loyalty, and growth – no coding required.">
+  
+  <!-- Font Import -->
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,300,400&display=swap" rel="stylesheet">
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="assets/styles.css">
+  <!-- Tailwind & Scripts -->
+  <script src="assets/tailwind.js"></script>
+  <script src="assets/menu.js"></script>
+  <script src="assets/lightdarkmode.js"></script>
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-base-bg text-base-text font-sans antialiased overflow-x-hidden dark:bg-dark-base-bg dark:text-dark-base-text">
+  <!-- Header with Navigation -->
+  <header class="py-6 px-4 md:px-8 lg:px-12 flex justify-between items-center z-50 relative bg-base-bg dark:bg-dark-base-bg">
+    <a href="index.html" class="text-2xl font-display font-extrabold text-accent-primary">EpicEats</a>
+    <nav class="hidden md:flex gap-6">
+      <a href="features.html" class="hover:text-accent-primary">Features</a>
+      <a href="pricing.html" class="hover:text-accent-primary">Pricing</a>
+      <a href="testimonials.html" class="hover:text-accent-primary">Testimonials</a>
+    </nav>
+    <button id="theme-toggle" class="p-2 rounded-full text-base-text-secondary hover:text-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary dark:text-dark-base-text-secondary transition-colors duration-200">
+      <i class="fas fa-sun text-xl hidden dark:inline-block"></i>
+      <i class="fas fa-moon text-xl dark:hidden"></i>
+    </button>
+    <button class="md:hidden" id="menu-toggle">
+      <i class="fas fa-bars text-2xl"></i>
+    </button>
+  </header>
+
+  <!-- Main Content (Hero Section) -->
+  <main>
+    <section id="hero" class="relative flex flex-col lg:flex-row items-center justify-center min-h-[calc(100vh-6rem)] px-4 py-16 md:py-24 text-center lg:text-left">
+      <div class="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+        <div class="lg:w-1/2">
+          <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 lg:pr-8 overflow-hidden pt-2 pb-10">
+            <span class="animated-hero-word">A</span> 
+            <span class="animated-hero-word">mobile</span> 
+            <span class="animated-hero-word">app</span> 
+            <span class="animated-hero-word">for</span> 
+            <span class="animated-hero-word text-accent-primary">your</span> 
+            <span class="animated-hero-word text-accent-primary">restaurant</span> 
+            <span class="animated-hero-word">in</span> 
+            <span class="animated-hero-word">minutes.</span>
+          </h1>
+          <p class="text-lg sm:text-xl text-base-text-secondary dark:text-dark-base-text-secondary mb-8 lg:pr-8">
+            EpicEats empowers restaurants to launch branded mobile apps for effortless online ordering, loyalty, and growth – no coding required.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+            <a href="#cta-final" class="btn-primary bg-accent-primary text-dark-base-bg font-bold py-3 px-8 rounded-full shadow-lg">
+              Get Started Free
+            </a>
+            <a href="#how-it-works" class="btn-secondary text-accent-primary font-semibold py-3 px-8 rounded-full border border-accent-primary">
+              See a Demo
+            </a>
+          </div>
+        </div>
+        <div class="lg:w-1/2 flex justify-center lg:justify-end mt-12 lg:mt-0">
+          <div class="app-screenshot-placeholder w-full max-w-[12rem] sm:max-w-[14rem] md:max-w-[16rem] lg:max-w-[18rem] aspect-[9/16] rounded-3xl overflow-hidden flex items-center justify-center p-4">
+            <div class="text-base-text-secondary dark:text-dark-base-text-secondary text-center text-sm sm:text-base">
+              <i class="fas fa-mobile-alt text-5xl sm:text-6xl mb-4"></i>
+              <p>Mobile App Interface</p>
+              <p class="text-xs mt-2">(Imagine your restaurant's custom app here!)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Additional sections can be added here -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-base-bg dark:bg-dark-base-bg py-12 px-4 md:px-8 lg:px-12 text-base-text-secondary dark:text-dark-base-text-secondary text-center border-t border-gray-200 dark:border-dark-base-surface">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex-shrink-0">
+        <a href="index.html" class="text-2xl font-display font-extrabold text-accent-primary">EpicEats</a>
+        <p class="text-sm mt-2">© 2023 EpicEats. All rights reserved.</p>
+      </div>
+      <nav class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium">
+        <a href="index.html" class="footer-link hover:text-accent-primary">Home</a>
+        <a href="features.html" class="footer-link hover:text-accent-primary">Features</a>
+        <a href="pricing.html" class="footer-link hover:text-accent-primary">Pricing</a>
+        <a href="testimonials.html" class="footer-link hover:text-accent-primary">Testimonials</a>
+        <a href="#" class="footer-link hover:text-accent-primary">Privacy Policy</a>
+      </nav>
+      <div class="flex space-x-6 text-xl">
+        <a href="#" class="footer-social-icon hover:text-accent-primary"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="footer-social-icon hover:text-accent-primary"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="footer-social-icon hover:text-accent-primary"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-social-icon hover:text-accent-primary"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
