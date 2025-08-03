@@ -1,103 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EpicEats - Revolutionize Your Restaurant with a Custom Mobile App</title>
-  <meta name="description" content="EpicEats empowers restaurants to launch branded mobile apps for effortless online ordering, loyalty, and growth – no coding required.">
-  
-  <!-- Font Import -->
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,300,400&display=swap" rel="stylesheet">
-  <!-- Global CSS -->
-  <link rel="stylesheet" href="assets/styles.css">
-  <!-- Tailwind & Scripts -->
-  <script src="https://cdn.tailwindcss.com/"></script>
-  <script src="assets/tailwind.js"></script>
-  <script src="assets/menu.js"></script>
-  <script src="assets/lightdarkmode.js"></script>
-  <!-- Font Awesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EpicEats - Revolutionize Your Restaurant with a Custom Mobile App</title>
+    <meta name="description" content="EpicEats empowers restaurants to launch branded mobile apps for effortless online ordering, loyalty, and growth – no coding required.">
+    
+    <!-- Satoshi Font Import from Fontshare -->
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,300,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind CSS custom configuration for colors, fonts
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Base colors (default to light mode unless 'dark' class is present on HTML tag)
+                        'base-bg': '#F8F8F8',      // Main background for light mode
+                        'base-surface': '#FFFFFF', // Card/section background for light mode
+                        'base-text': '#333333',    // Primary text for light mode
+                        'base-text-secondary': '#666666', // Secondary text for light mode
+
+                        // Dark mode colors (applied with 'dark:' prefix in classes)
+                        'dark-base-bg': '#0A0A0B',          // Main background for dark mode
+                        'dark-base-surface': '#1A1A1C',     // Card/section background for dark mode
+                        'dark-base-text': '#E0E0E0',        // Primary text for dark mode
+                        'dark-base-text-secondary': '#A0A0A0', // Secondary text for dark mode
+
+                        // Accent color (consistent across both modes for branding)
+                        'accent-primary': '#FF6B6B', // Vibrant Red/Coral for CTAs and highlights
+                        'accent-lighter': '#FF9A9A', 
+                        'accent-darker': '#E05F5F',  
+                    },
+                    fontFamily: {
+                        sans: ['Satoshi', 'sans-serif'], 
+                        display: ['Satoshi', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome for icons (for theme toggle and feature icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        /* Specific styles for subtle hover effects (only transform remains) */
+        .btn-primary, .btn-secondary, .feature-card, .footer-link, .footer-social-icon {
+            transition: transform 0.2s ease;
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-2px);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            /* Lighter shadow on hover */
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.1); 
+        }
+        .footer-link:hover, .footer-social-icon:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Styles for the app screenshot placeholder in the Hero section */
+        .app-screenshot-placeholder {
+            background: linear-gradient(135deg, #E0E0E0, #F0F0F0); /* Light mode gradient */
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            
+            /* Dark mode override */
+            .dark & { /* This applies the style only when the parent .dark is present */
+                background: linear-gradient(135deg, #1A1A1C, #2A2A2C);
+                border: 1px solid rgba(255,255,255,0.1);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+        }
+
+        /* Hero Headline Word Animation Styles */
+        .animated-hero-word {
+            /* Initial state for animation */
+            opacity: 0;
+            transform: translateY(30px); /* Words start 30px below final position */
+            filter: blur(5px);
+            display: inline-block; /* Crucial for transform and vertical movement on inline elements */
+            animation-name: word-reveal;
+            animation-duration: 0.7s; /* Duration for each word's animation */
+            animation-fill-mode: forwards; /* Keep the final state of the animation */
+            /* Removed white-space: nowrap; to allow words to wrap naturally */
+        }
+
+        @keyframes word-reveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+                filter: blur(5px);
+            }
+          80% {
+            filter: blur(0);
+          }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+    </style>
 </head>
-<body class="bg-base-bg text-base-text font-sans antialiased overflow-x-hidden dark:bg-dark-base-bg dark:text-dark-base-text">
-  <!-- Header with Navigation -->
-  <header class="py-6 px-4 md:px-8 lg:px-12 flex justify-between items-center z-50 relative bg-base-bg dark:bg-dark-base-bg">
-    <a href="index.html" class="text-2xl font-display font-extrabold text-accent-primary">EpicEats</a>
-    <nav class="hidden md:flex gap-6">
-      <a href="features.html" class="hover:text-accent-primary">Features</a>
-      <a href="pricing.html" class="hover:text-accent-primary">Pricing</a>
-      <a href="testimonials.html" class="hover:text-accent-primary">Testimonials</a>
-    </nav>
-    <button id="theme-toggle" class="p-2 rounded-full text-base-text-secondary hover:text-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary dark:text-dark-base-text-secondary transition-colors duration-200">
-      <i class="fas fa-sun text-xl hidden dark:inline-block"></i>
-      <i class="fas fa-moon text-xl dark:hidden"></i>
-    </button>
-    <button class="md:hidden" id="menu-toggle">
-      <i class="fas fa-bars text-2xl"></i>
-    </button>
-  </header>
+<!-- The 'dark' class will be added/removed from the HTML tag by JavaScript -->
+<body class="bg-base-bg text-base-text font-sans antialiased overflow-x-hidden
+             dark:bg-dark-base-bg dark:text-dark-base-text">
 
-  <!-- Main Content (Hero Section) -->
-  <main>
-    <section id="hero" class="relative flex flex-col lg:flex-row items-center justify-center min-h-[calc(100vh-6rem)] px-4 py-16 md:py-24 text-center lg:text-left">
-      <div class="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
-        <div class="lg:w-1/2">
-          <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 lg:pr-8 overflow-hidden pt-2 pb-10">
-            <span class="animated-hero-word">A</span> 
-            <span class="animated-hero-word">mobile</span> 
-            <span class="animated-hero-word">app</span> 
-            <span class="animated-hero-word">for</span> 
-            <span class="animated-hero-word text-accent-primary">your</span> 
-            <span class="animated-hero-word text-accent-primary">restaurant</span> 
-            <span class="animated-hero-word">in</span> 
-            <span class="animated-hero-word">minutes.</span>
-          </h1>
-          <p class="text-lg sm:text-xl text-base-text-secondary dark:text-dark-base-text-secondary mb-8 lg:pr-8">
-            EpicEats empowers restaurants to launch branded mobile apps for effortless online ordering, loyalty, and growth – no coding required.
-          </p>
-          <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-            <a href="#cta-final" class="btn-primary bg-accent-primary text-dark-base-bg font-bold py-3 px-8 rounded-full shadow-lg">
-              Get Started Free
-            </a>
-            <a href="#how-it-works" class="btn-secondary text-accent-primary font-semibold py-3 px-8 rounded-full border border-accent-primary">
-              See a Demo
-            </a>
-          </div>
-        </div>
-        <div class="lg:w-1/2 flex justify-center lg:justify-end mt-12 lg:mt-0">
-          <div class="app-screenshot-placeholder w-full max-w-[12rem] sm:max-w-[14rem] md:max-w-[16rem] lg:max-w-[18rem] aspect-[9/16] rounded-3xl overflow-hidden flex items-center justify-center p-4">
-            <div class="text-base-text-secondary dark:text-dark-base-text-secondary text-center text-sm sm:text-base">
-              <i class="fas fa-mobile-alt text-5xl sm:text-6xl mb-4"></i>
-              <p>Mobile App Interface</p>
-              <p class="text-xs mt-2">(Imagine your restaurant's custom app here!)</p>
+    <!-- Header (Simple, acting as a logo container for a single-page layout) -->
+    <header class="py-6 px-4 md:px-8 lg:px-12 flex justify-between items-center z-50 relative
+                   bg-base-bg dark:bg-dark-base-bg">
+        <a href="#" class="text-2xl font-display font-extrabold text-accent-primary">EpicEats</a>
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" class="p-2 rounded-full text-base-text-secondary hover:text-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary dark:text-dark-base-text-secondary transition-colors duration-200">
+            <i class="fas fa-sun text-xl hidden dark:inline-block"></i> <!-- Sun icon for light mode (visible in dark mode) -->
+            <i class="fas fa-moon text-xl dark:hidden"></i> <!-- Moon icon for dark mode (visible in light mode) -->
+        </button>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative flex flex-col lg:flex-row items-center justify-center min-h-[calc(100vh-6rem)] px-4 py-16 md:py-24 text-center lg:text-left overflow-hidden">
+            <div class="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+                <!-- Hero Content (Text & CTAs) -->
+                <div class="lg:w-1/2">
+                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 lg:pr-8 overflow-hidden pt-2 pb-10">
+                        <!-- Hero Headline with individual words for animation -->
+                        <span class="animated-hero-word">A</span> 
+                        <span class="animated-hero-word">mobile</span> 
+                        <span class="animated-hero-word">app</span> 
+                        <span class="animated-hero-word">for</span> 
+                        <span class="animated-hero-word text-accent-primary">your</span> 
+                        <span class="animated-hero-word text-accent-primary">restaurant</span> 
+                        <span class="animated-hero-word">in</span> 
+                        <span class="animated-hero-word">minutes.</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-base-text-secondary dark:text-dark-base-text-secondary mb-8 lg:pr-8">
+                        EpicEats empowers restaurants to launch branded mobile apps for effortless online ordering, loyalty, and growth – no coding required.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                        <a href="#cta-final" class="btn-primary bg-accent-primary text-dark-base-bg font-bold py-3 px-8 rounded-full shadow-lg">
+                            Get Started Free
+                        </a>
+                        <a href="#how-it-works" class="btn-secondary text-accent-primary font-semibold py-3 px-8 rounded-full border border-accent-primary">
+                            See a Demo
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Visual (App Screenshot Placeholder) -->
+                <div class="lg:w-1/2 flex justify-center lg:justify-end mt-12 lg:mt-0">
+                    <div class="app-screenshot-placeholder w-full max-w-[12rem] sm:max-w-[14rem] md:max-w-[16rem] lg:max-w-[18rem] aspect-[9/16] rounded-3xl overflow-hidden flex items-center justify-center p-4">
+                        <div class="text-base-text-secondary dark:text-dark-base-text-secondary text-center text-sm sm:text-base">
+                            <i class="fas fa-mobile-alt text-5xl sm:text-6xl text-base-text-secondary dark:text-dark-base-text-secondary mb-4"></i>
+                            <p>Stunning Mobile App Interface Placeholder</p>
+                            <p class="text-xs mt-2">(Imagine your restaurant's custom app here!)</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Additional sections can be added here -->
-  </main>
+        </section>
 
-  <!-- Footer -->
-  <footer class="bg-base-bg dark:bg-dark-base-bg py-12 px-4 md:px-8 lg:px-12 text-base-text-secondary dark:text-dark-base-text-secondary text-center border-t border-gray-200 dark:border-dark-base-surface">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-      <div class="flex-shrink-0">
-        <a href="index.html" class="text-2xl font-display font-extrabold text-accent-primary">EpicEats</a>
-        <p class="text-sm mt-2">© 2023 EpicEats. All rights reserved.</p>
-      </div>
-      <nav class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium">
-        <a href="index.html" class="footer-link hover:text-accent-primary">Home</a>
-        <a href="features.html" class="footer-link hover:text-accent-primary">Features</a>
-        <a href="pricing.html" class="footer-link hover:text-accent-primary">Pricing</a>
-        <a href="testimonials.html" class="footer-link hover:text-accent-primary">Testimonials</a>
-        <a href="#" class="footer-link hover:text-accent-primary">Privacy Policy</a>
-      </nav>
-      <div class="flex space-x-6 text-xl">
-        <a href="#" class="footer-social-icon hover:text-accent-primary"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="footer-social-icon hover:text-accent-primary"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="footer-social-icon hover:text-accent-primary"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="footer-social-icon hover:text-accent-primary"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-    </div>
-  </footer>
+        <!-- Problem/Solution Section -->
+        <section id="problem-solution" class="py-20 px-4 md:px-8 lg:px-12
+                   bg-base-surface dark:bg-dark-base-surface text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-display text-3xl sm:text-4xl font-bold mb-8 text-base-text dark:text-dark-base-text">
+                    Tired of high commission fees and lost customer connections?
+                </h2>
+                <p class="text-lg text-base-text-secondary dark:text-dark-base-text-secondary leading-relaxed">
+                    Many restaurant owners struggle with outdated ordering systems and a lack of direct loyalty building.
+                    EpicEats offers the elegant solution: launch your own branded mobile app for direct online orders,
+                    cultivate genuine customer relationships, and boost your business growth – without complex coding or hidden fees.
+                </p>
+            </div>
+        </section>
+
+        <!-- How It Works Section (Simplified Steps) - Swapped Background -->
+        <section id="how-it-works" class="py-20 px-4 md:px-8 lg:px-12
+                   bg-base-bg dark:bg-dark-base-bg text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-display text-3xl sm:text-4xl font-bold mb-12 text-base-text dark:text-dark-base-text">
+                    Getting Started is Effortless.
+                </h2>
+                <div class="flex flex-col md:flex-row justify-around items-stretch gap-8">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center bg-base-surface dark:bg-dark-base-surface p-6 rounded-3xl shadow-lg">
+                        <div class="text-accent-primary text-5xl font-extrabold mb-4">1</div>
+                        <h3 class="text-xl font-semibold mb-3 text-base-text dark:text-dark-base-text">Sign Up & Customize</h3>
+                        <p class="text-base-text-secondary dark:text-dark-base-text-secondary">Create your account and personalize your app with your brand's unique style.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center bg-base-surface dark:bg-dark-base-surface p-6 rounded-3xl shadow-lg">
+                        <div class="text-accent-primary text-5xl font-extrabold mb-4">2</div>
+                        <h3 class="text-xl font-semibold mb-3 text-base-text dark:text-dark-base-text">Share Your App</h3>
+                        <p class="text-base-text-secondary dark:text-dark-base-text-secondary">Share your custom app link and QR code with your customers everywhere.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center bg-base-surface dark:bg-dark-base-surface p-6 rounded-3xl shadow-lg">
+                        <div class="text-accent-primary text-5xl font-extrabold mb-4">3</div>
+                        <h3 class="text-xl font-semibold mb-3 text-base-text dark:text-dark-base-text">Boost Sales & Loyalty</h3>
+                        <p class="text-base-text-secondary dark:text-dark-base-text-secondary">Watch your sales grow and customers keep coming back for more!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features & Benefits Section - Swapped Background -->
+        <section id="features" class="py-20 px-4 md:px-8 lg:px-12
+                   bg-base-surface dark:bg-dark-base-surface">
+            <div class="max-w-7xl mx-auto text-center">
+                <h2 class="font-display text-3xl sm:text-4xl font-bold mb-16 text-base-text dark:text-dark-base-text">
+                    Powerful Features Designed for Restaurant Growth
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                    <!-- Feature 1: Effortless Brand Customization & Setup -->
+                    <div class="feature-card bg-base-bg dark:bg-dark-base-bg p-8 rounded-3xl shadow-xl text-left">
+                        <div class="text-accent-primary text-4xl mb-4"><i class="fas fa-brush"></i></div>
+                        <h3 class="text-2xl font-display font-semibold mb-3 text-base-text dark:text-dark-base-text">Effortless Brand Customization & Setup</h3>
+                        <p class="text-base-text-secondary dark:text-dark-base-text-secondary">
+                            Quickly create your unique app. Simply input your restaurant name, upload your logo, choose your brand colors and fonts.
+                            Our intuitive interface makes it easy to add menu items, prices, options, and categories. Go live in no time!
+                            Maintain full control over your brand identity without any coding.
+                        </p>
+                    </div>
+                    <!-- Feature 2: Centralized Command Dashboard -->
+                    <div class="feature-card bg-base-bg dark:bg-dark-base-bg p-8 rounded-3xl shadow-xl text-left">
+                        <div class="text-accent-primary text-4xl mb-4"><i class="fas fa-tachometer-alt"></i></div>
+                        <h3 class="text-2xl font-display font-semibold mb-3 text-base-text dark:text-dark-base-text">Centralized Command Dashboard</h3>
+                        <p class="text-base-text-secondary dark:text-dark-base-text-secondary">
+                            Manage every aspect of your app from one powerful dashboard. Generate custom links and QR codes for easy customer app installation.
+                            Create branded printables for tables or flyers. Seamlessly view and manage all mobile orders, track sales, and gain insights
+                            to optimize your operations and marketing efforts.
+                        </p>
+                    </div>
+                    <!-- Feature 3: Seamless Customer Ordering Experience -->
+                    <div class="feature-card bg-base-bg dark:bg-dark-base-bg p-8 rounded-3xl shadow-xl text-left">
+                        <div class="text-accent-primary text-4xl mb-4"><i class="fas fa-mobile-alt"></i></div>
+                        <h3 class="text-2xl font-display font-semibold mb-3 text-base-text dark:text-dark-base-text">Seamless Customer Ordering Experience</h3>
+                        <p class="text-base-text-secondary dark:text-dark-base-text-secondary">
+                            Your customers will love the smooth, intuitive ordering process. From browsing your menu to adding items to their cart
+                            and checking out securely, every step is optimized for convenience. Real-time order status notifications keep them
+                            informed, enhancing satisfaction and reducing wait time inquiries.
+                        </p>
+                    </div>
+                    <!-- Feature 4: Built-In Loyalty & Retention Program -->
+                    <div class="feature-card bg-base-bg dark:bg-dark-base-bg p-8 rounded-3xl shadow-xl text-left">
+                        <div class="text-accent-primary text-4xl mb-4"><i class="fas fa-star"></i></div>
+                        <h3 class="text-2xl font-display font-semibold mb-3 text-base-text dark:text-dark-base-text">Built-In Loyalty & Retention Program</h3>
+                        <p class="text-base-text-secondary dark:text-dark-base-text-secondary">
+                            Transform new customers into loyal regulars. Our integrated loyalty program allows customers to earn points with every
+                            pickup or delivery order. These points can then be redeemed for discounts or free items on future purchases,
+                            driving repeat business and building strong, lasting customer relationships effortlessly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials / Social Proof Section -->
+        <section id="testimonials" class="py-20 px-4 md:px-8 lg:px-12
+                   bg-base-bg dark:bg-dark-base-bg">
+            <div class="max-w-7xl mx-auto text-center">
+                <h2 class="font-display text-3xl sm:text-4xl font-bold mb-16 text-base-text dark:text-dark-base-text">
+                    What Restaurant Owners Are Saying
+                </h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-base-surface dark:bg-dark-base-surface p-8 rounded-lg shadow-xl text-left">
+                        <p class="text-base-text-secondary dark:text-dark-base-text-secondary text-lg italic mb-6">
+                            "EpicEats transformed our online presence! Our customers love the new app, and we've significantly reduced our third-party commission fees. It's truly a game-changer for our small business."
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://via.placeholder.com/60/FF6B6B/FFFFFF?text=JP" alt="John P. Profile" class="w-12 h-12 rounded-full mr-4 border-2 border-accent-primary">
+                            <div>
+                                <p class="font-semibold text-base-text dark:text-dark-base-text">John P.</p>
+                                <p class="text-sm text-base-text-secondary dark:text-dark-base-text-secondary">Owner, "The Bistro Bites"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="bg-base-surface dark:bg-dark-base-surface p-8 rounded-lg shadow-xl text-left">
+                        <p class="text-base-text-secondary dark:text-dark-base-text-secondary text-lg italic mb-6">
+                            "The loyalty program alone has paid for itself multiple times over. Our regulars are more engaged than ever, and managing everything from the dashboard is incredibly intuitive. Highly recommend!"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://via.placeholder.com/60/FF6B6B/FFFFFF?text=AS" alt="Sarah T. Profile" class="w-12 h-12 rounded-full mr-4 border-2 border-accent-primary">
+                            <div>
+                                <p class="font-semibold text-base-text dark:text-dark-base-text">Anna S.</p>
+                                <p class="text-sm text-base-text-secondary dark:text-dark-base-text-secondary">Manager, "Global Flavors"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="bg-base-surface dark:bg-dark-base-surface p-8 rounded-lg shadow-xl text-left">
+                        <p class="text-base-text-secondary dark:text-dark-base-text-secondary text-lg italic mb-6">
+                            "Setting up our custom app was surprisingly fast and easy. EpicEats provided all the tools we needed to launch our own digital storefront without any headaches. Customer support is also top-notch!"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://via.placeholder.com/60/FF6B6B/FFFFFF?text=MK" alt="Michael K. Profile" class="w-12 h-12 rounded-full mr-4 border-2 border-accent-primary">
+                            <div>
+                                <p class="font-semibold text-base-text dark:text-dark-base-text">Michael K.</p>
+                                <p class="text-sm text-base-text-secondary dark:text-dark-base-text-secondary">Founder, "Keto Kitchen"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Proof: Trusted by X+ Restaurants (Placeholder) -->
+                <div class="mt-16">
+                    <p class="text-base-text-secondary dark:text-dark-base-text-secondary text-xl font-semibold mb-6">Trusted by 500+ Restaurants Worldwide</p>
+                    <div class="flex flex-wrap justify-center gap-6 opacity-60">
+                        <!-- Placeholder logos for demonstration -->
+                        <img src="https://via.placeholder.com/100x40/FFFFFF/333333?text=Brand+A" alt="Brand A Logo" class="h-10 w-auto dark:bg-dark-base-surface dark:text-dark-base-text">
+                        <img src="https://via.placeholder.com/100x40/FFFFFF/333333?text=Brand+B" alt="Brand B Logo" class="h-10 w-auto dark:bg-dark-base-surface dark:text-dark-base-text">
+                        <img src="https://via.placeholder.com/100x40/FFFFFF/333333?text=Brand+C" alt="Brand C Logo" class="h-10 w-auto dark:bg-dark-base-surface dark:text-dark-base-text">
+                        <img src="https://via.placeholder.com/100x40/FFFFFF/333333?text=Brand+D" alt="Brand D Logo" class="h-10 w-auto dark:bg-dark-base-surface dark:text-dark-base-text">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Call to Action Section -->
+        <section id="cta-final" class="py-20 px-4 md:px-8 lg:px-12
+                   bg-base-surface dark:bg-dark-base-surface text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-display text-3xl sm:text-4xl font-bold mb-8 text-base-text dark:text-dark-base-text">
+                    Ready to Grow Your Business? <span class="text-accent-primary">Get Started with EpicEats Today!</span>
+                </h2>
+                <p class="text-lg sm:text-xl text-base-text-secondary dark:text-dark-base-text-secondary mb-10">
+                    Join hundreds of restaurants already thriving with their own custom mobile app.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#" class="btn-primary bg-accent-primary text-dark-base-bg font-bold py-4 px-10 rounded-full shadow-lg">
+                        Get Started Free
+                    </a>
+                    <a href="#" class="btn-secondary text-accent-primary font-semibold py-4 px-10 rounded-full border border-accent-primary">
+                        Book a Free Consultation
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-base-bg dark:bg-dark-base-bg py-12 px-4 md:px-8 lg:px-12 text-base-text-secondary dark:text-dark-base-text-secondary text-center border-t border-gray-200 dark:border-dark-base-surface">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex-shrink-0">
+                <a href="#" class="text-2xl font-display font-extrabold text-accent-primary">EpicEats</a>
+                <p class="text-sm mt-2">© 2023 EpicEats. All rights reserved.</p>
+            </div>
+            
+            <!-- Footer Navigation Links (Placeholders) -->
+            <nav class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium">
+                <a href="#" class="footer-link text-base-text-secondary hover:text-accent-primary dark:text-dark-base-text-secondary">Home</a>
+                <a href="#features" class="footer-link text-base-text-secondary hover:text-accent-primary dark:text-dark-base-text-secondary">Features</a>
+                <a href="#" class="footer-link text-base-text-secondary hover:text-accent-primary dark:text-dark-base-text-secondary">Pricing</a>
+                <a href="#testimonials" class="footer-link text-base-text-secondary hover:text-accent-primary dark:text-dark-base-text-secondary">Testimonials</a>
+                <a href="#" class="footer-link text-base-text-secondary hover:text-accent-primary dark:text-dark-base-text-secondary">Privacy Policy</a>
+            </nav>
+
+            <!-- Social Media Icons (Placeholders) -->
+            <div class="flex space-x-6 text-xl">
+                <a href="#" class="footer-social-icon text-base-text-secondary hover:text-accent-primary dark:text-dark-base-text-secondary"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="footer-social-icon text-base-text-secondary hover:text-accent-primary dark:text-dark-base-text-secondary"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="footer-social-icon text-base-text-secondary hover:text-accent-primary dark:text-dark-base-text-secondary"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="footer-social-icon text-base-text-secondary hover:text-accent-primary dark:text-dark-base-text-secondary"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for smooth scroll and theme toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth Scroll for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Hero Headline Word Animation
+            const heroWords = document.querySelectorAll('.animated-hero-word');
+            heroWords.forEach((word, index) => {
+                // Staggered delay for each word: index * delay_per_word
+                // 0.12s delay creates a nice overlap given the 0.7s animation duration
+                word.style.animationDelay = `${index * 0.12}s`; 
+            });
+
+            // Theme toggle logic
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement; // Get the <html> element
+
+            // Function to set the theme
+            const setTheme = (theme) => {
+                if (theme === 'dark') {
+                    htmlElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                }
+            };
+
+            // Check user's preferred theme on page load
+            const currentTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (currentTheme) {
+                // If a theme is explicitly set in localStorage, use it
+                setTheme(currentTheme);
+            } else if (systemPrefersDark) {
+                // Otherwise, check system preference
+                setTheme('dark');
+            } else {
+                // Default to light if no preference and system prefers light
+                setTheme('light'); 
+            }
+
+            // Toggle theme on button click
+            themeToggleBtn.addEventListener('click', () => {
+                const newTheme = htmlElement.classList.contains('dark') ? 'light' : 'dark';
+                setTheme(newTheme);
+            });
+        });
+    </script>
 </body>
 </html>
